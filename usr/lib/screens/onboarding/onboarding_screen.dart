@@ -1,21 +1,21 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_slider.dart' as carousel_slider;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
   @override
-  State<OnboardingScreen> createState() => _OnboardingScreenState();
+  State&lt;OnboardingScreen&gt; createState() =&gt; _OnboardingScreenState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen> {
-  final CarouselController _controller = CarouselController();
+class _OnboardingScreenState extends State&lt;OnboardingScreen&gt; {
+  final carousel_slider.CarouselController _controller = carousel_slider.CarouselController();
   int _current = 0;
 
-  final List<Map<String, String>> _onboardingData = [
+  final List&lt;Map&lt;String, String&gt;&gt; _onboardingData = [
     {
       'title': 'Welcome to CouldAI',
       'description': 'Connect with friends and family through secure messaging.',
@@ -39,9 +39,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: Column(
         children: [
           Expanded(
-            child: CarouselSlider(
+            child: carousel_slider.CarouselSlider(
               carouselController: _controller,
-              options: CarouselOptions(
+              options: carousel_slider.CarouselOptions(
                 height: MediaQuery.of(context).size.height,
                 viewportFraction: 1.0,
                 enableInfiniteScroll: false,
@@ -113,7 +113,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 Row(
                   children: List.generate(
                     _onboardingData.length,
-                    (index) => Container(
+                    (index) =&gt; Container(
                       width: 10,
                       height: 10,
                       margin: const EdgeInsets.only(right: 5),
@@ -129,7 +129,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ElevatedButton(
                   onPressed: _current == _onboardingData.length - 1
                       ? _completeOnboarding
-                      : () => _controller.nextPage(),
+                      : () =&gt; _controller.nextPage(),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF0B9D78),
                     padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),

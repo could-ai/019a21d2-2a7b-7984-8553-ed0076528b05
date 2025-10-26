@@ -3,14 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../providers/chat_provider.dart';
 import '../chat/chat_screen.dart';
-import '../../models/chat.dart';
+import '../../models/models.dart';
 
 class ChatsScreen extends StatelessWidget {
   const ChatsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final chatProvider = Provider.of<ChatProvider>(context);
+    final chatProvider = Provider.of&lt;ChatProvider&gt;(context);
 
     return Scaffold(
       body: ListView.builder(
@@ -22,14 +22,14 @@ class ChatsScreen extends StatelessWidget {
               motion: const ScrollMotion(),
               children: [
                 SlidableAction(
-                  onPressed: (_) => chatProvider.pinChat(chat.id),
+                  onPressed: (_) =&gt; chatProvider.pinChat(chat.id),
                   backgroundColor: Colors.blue,
                   foregroundColor: Colors.white,
                   icon: chat.isPinned ? Icons.push_pin : Icons.push_pin_outlined,
                   label: chat.isPinned ? 'Unpin' : 'Pin',
                 ),
                 SlidableAction(
-                  onPressed: (_) => chatProvider.muteChat(chat.id),
+                  onPressed: (_) =&gt; chatProvider.muteChat(chat.id),
                   backgroundColor: Colors.orange,
                   foregroundColor: Colors.white,
                   icon: chat.isMuted ? Icons.volume_up : Icons.volume_off,
@@ -41,14 +41,14 @@ class ChatsScreen extends StatelessWidget {
               motion: const ScrollMotion(),
               children: [
                 SlidableAction(
-                  onPressed: (_) => _deleteChat(context, chatProvider, chat.id),
+                  onPressed: (_) =&gt; _deleteChat(context, chatProvider, chat.id),
                   backgroundColor: Colors.red,
                   foregroundColor: Colors.white,
                   icon: Icons.delete,
                   label: 'Delete',
                 ),
                 SlidableAction(
-                  onPressed: (_) => _archiveChat(context, chatProvider, chat.id),
+                  onPressed: (_) =&gt; _archiveChat(context, chatProvider, chat.id),
                   backgroundColor: Colors.grey,
                   foregroundColor: Colors.white,
                   icon: Icons.archive,
@@ -63,7 +63,7 @@ class ChatsScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ChatScreen(chatId: chat.id, chatName: chat.name),
+                    builder: (context) =&gt; ChatScreen(chatId: chat.id, chatName: chat.name),
                   ),
                 );
               },
@@ -72,7 +72,7 @@ class ChatsScreen extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _showNewChatDialog(context),
+        onPressed: () =&gt; _showNewChatDialog(context),
         child: const Icon(Icons.add),
       ),
     );
@@ -144,7 +144,7 @@ class ChatListItem extends StatelessWidget {
               color: Colors.grey,
             ),
           ),
-          if (chat.unreadCount > 0)
+          if (chat.unreadCount &gt; 0)
             Container(
               padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
@@ -170,9 +170,9 @@ class ChatListItem extends StatelessWidget {
     final now = DateTime.now();
     final difference = now.difference(time);
 
-    if (difference.inDays > 0) {
+    if (difference.inDays &gt; 0) {
       return '${time.day}/${time.month}';
-    } else if (difference.inHours > 0) {
+    } else if (difference.inHours &gt; 0) {
       return '${time.hour}:${time.minute.toString().padLeft(2, '0')}';
     } else {
       return '${time.minute}m ago';
